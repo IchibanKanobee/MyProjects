@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .forms import PlatformForm, RecordTypeForm
+from .forms import PlatformForm, RecordTypeForm, RecordForm
 
 
 def index(request):
@@ -24,3 +24,13 @@ def add_record_type(request):
         return render(request, 'add_record_type.html', {})
     else:
         return render(request, 'add_record_type.html', {})
+
+
+def add_record(request):
+    if request.method == "POST":
+        form = RecordForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+        return render(request, 'add_record.html', {})
+    else:
+        return render(request, 'add_record.html', {})
