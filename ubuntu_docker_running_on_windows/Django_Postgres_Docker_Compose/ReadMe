@@ -1,3 +1,6 @@
 Remember, when you do python manage.py makemigrations (or migrate), you have to do it inside app container, so do thid first:
 docker exec -it af5a7643dcab /bin/bash
 to get inside of the container, and then do your migrations
+
+How to transfer to Windows: Make a copy of the directory, and db file will not be copied because of the permissions. It's ok, that's what we want. Zip up the copied directory and copy to google drive.
+On widows, download the directory, start Docker Desktop and run "docker compose up --build". Create migrations in Docker Desktop.
