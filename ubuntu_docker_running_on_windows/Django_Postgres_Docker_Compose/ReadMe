@@ -4,3 +4,36 @@ to get inside of the container, and then do your migrations
 
 How to transfer to Windows: Make a copy of the directory, and db file will not be copied because of the permissions. It's ok, that's what we want. Zip up the copied directory and copy to google drive.
 On widows, download the directory, start Docker Desktop and run "docker compose up --build". Create migrations in Docker Desktop.
+
+https://stackoverflow.com/questions/42086613/cannot-remove-all-containers-in-a-row
+sudo docker rm -f $(sudo docker ps -q)
+To stop container starting automatically when docker starts use:
+docker update --restart=no container_name
+
+docker container run -it [yourImage] bash
+
+docker compose down --remove-orphans
+docker-compose up --force-recreate
+
+------------------------------------------------------------------------------------
+Prevent restart
+https://stackoverflow.com/questions/41036273/disable-autostart-of-docker-compose-project
+
+Today I had the same issue that all containers are started when I boot my dev laptop, as restart: always was set in the .yml files.
+
+As I don't want to touch the .yml files, I just found out (thx Bobby) how to alter this setting by:
+
+docker update --restart=no <MY-CONTAINER-ID>
+
+
+Try with docker-compose down instead of docker-compose stop
+
+down
+
+Stops containers and removes containers, networks, volumes, and images created by up. Networks and volumes defined as external are never removed.
+
+stop
+
+Stops running containers
+------------------------------------------------------------------------------------
+

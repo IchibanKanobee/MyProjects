@@ -34,5 +34,4 @@ class RecordTypeForm(forms.ModelForm):
 class RecordForm(forms.ModelForm):
     class Meta:
         model = Record
-        fields = ['file_name', 'tags', 'type', 'source_platform', 'author', 'image', 'url', 'edited']
-        
+        fields = ['file_name', 'tags', 'type', 'source_platform', 'author', 'url', 'edited']

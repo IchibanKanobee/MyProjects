@@ -26,7 +26,7 @@ class Platform(models.Model):
 
 class Record(models.Model):
     tags = ArrayField(models.CharField(max_length=100), blank=True)
-    file_name = models.FileField()
+    file_name = models.CharField(blank=True)
     creation_date = models.DateTimeField(auto_now_add=True, blank=True) 
     type = models.ForeignKey(
         "RecordType",
@@ -38,12 +38,8 @@ class Record(models.Model):
          default = 2,
     )
     author = models.CharField(blank=True)
-    image = models.ImageField(blank=True)
     url = models.URLField(blank=True)
     edited = models.BooleanField(default=False)
-
-    # def filename(self):
-    #     return os.path.basename(self.file.name)
     
 
 class Account(models.Model):
