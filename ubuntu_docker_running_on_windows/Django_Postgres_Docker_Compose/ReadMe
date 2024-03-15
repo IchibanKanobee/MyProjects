@@ -37,3 +37,8 @@ stop
 Stops running containers
 ------------------------------------------------------------------------------------
 
+Datepicker bootstrap5
+https://stackoverflow.com/questions/68662850/datepicker-bootstrap-5
+
+<label for="startDate">Start</label>
+<input id="startDate" class="form-control" type="date" />

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .forms import PlatformForm, RecordTypeForm, RecordForm
+from .forms import PlatformForm, RecordTypeForm, RecordForm, AccountForm
 from .models import Platform, RecordType
 
 
@@ -43,3 +43,23 @@ def add_record(request):
         return render(request, 'add_record.html', {'platforms':platforms, 'types':types})
     else:
         return render(request, 'add_record.html', {'platforms':platforms, 'types':types})
+
+
+def add_account(request):
+    platforms = Platform.objects.all()
+    if request.method == "POST":
+        form = AccountForm(request.POST or None)
+        name = request.POST.get('name')
+        suffix = request.POST.get('suffix')
+        creation_date = request.POST.get('creation_date')
+        print(name)
+        print(suffix)
+        print(creation_date)
+        print(1)
+        if form.is_valid():
+            print(2)
+            form.save()
+        return render(request, 'add_account.html', {'platforms':platforms})
+    else:
+        return render(request, 'add_account.html', {'platforms':platforms})
+

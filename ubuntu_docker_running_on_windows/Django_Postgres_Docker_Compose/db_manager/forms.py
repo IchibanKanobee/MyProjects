@@ -1,5 +1,5 @@
 from django import forms
-from .models import Platform, RecordType, Record
+from .models import Platform, RecordType, Record, Account
 
 class PlatformForm(forms.ModelForm):
     class Meta:
@@ -35,3 +35,9 @@ class RecordForm(forms.ModelForm):
     class Meta:
         model = Record
         fields = ['file_name', 'tags', 'type', 'source_platform', 'author', 'url', 'edited']
+
+
+class AccountForm(forms.ModelForm):
+    class Meta:
+        model = Account
+        fields = ['platform', 'name', 'suffix', 'creation_date']

@@ -49,4 +49,4 @@ class Account(models.Model):
     )
     name = models.CharField()
     suffix = models.CharField(blank=True)
-    creation_date = models.DateField(auto_now_add=True, blank=True) 
+    creation_date = models.DateField() 
