@@ -10,7 +10,7 @@ sudo docker rm -f $(sudo docker ps -q)
 To stop container starting automatically when docker starts use:
 docker update --restart=no container_name
 
-docker container run -it [yourImage] bash
+
 
 docker compose down --remove-orphans
 docker-compose up --force-recreate
@@ -42,3 +42,21 @@ https://stackoverflow.com/questions/68662850/datepicker-bootstrap-5
 
 <label for="startDate">Start</label>
 <input id="startDate" class="form-control" type="date" />
+------------------------------------------------------------------------------------
+
+The following command (which removes all unused containers, networks, images, and optionally, volumes) solve my problem:
+
+docker system prune
+--------------------------------------------------------------------------------------
+
+If service db not found, then "docker compos down -v" and restart sometimes help
+
+--------------------------------------------------------------------------------------
+How to work with a container interactively
+You can enter a running container with:
+docker exec -it my_new_container /bin/bash
+
+If the container is not running, then:
+docker run -it my_new_container /bin/bash
+
+

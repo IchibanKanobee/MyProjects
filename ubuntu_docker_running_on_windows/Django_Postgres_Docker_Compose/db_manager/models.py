@@ -50,3 +50,4 @@ class Account(models.Model):
     name = models.CharField()
     suffix = models.CharField(blank=True)
     creation_date = models.DateField() 
+    email = models.CharField(blank=True)
