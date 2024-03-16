@@ -1,5 +1,5 @@
 from django import forms
-from .models import Platform, RecordType, Record, Account
+from .models import Platform, RecordType, Record, Account, Post
 
 class PlatformForm(forms.ModelForm):
     class Meta:
@@ -41,3 +41,9 @@ class AccountForm(forms.ModelForm):
     class Meta:
         model = Account
         fields = ['platform', 'name', 'suffix', 'creation_date']
+
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['account', 'record', 'annotation', 'creation_date', 'platform_specific_reference']

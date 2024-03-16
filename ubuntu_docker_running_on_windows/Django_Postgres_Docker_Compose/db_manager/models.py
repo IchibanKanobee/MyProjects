@@ -12,7 +12,7 @@ class Post(models.Model):
         on_delete=models.CASCADE,
     )
     annotation = models.TextField(blank=True)
-    creation_date = models.DateTimeField(auto_now_add=True, blank=True) 
+    creation_date = models.DateTimeField(blank=True) 
     platform_specific_reference = models.CharField(blank=True)
 
 
