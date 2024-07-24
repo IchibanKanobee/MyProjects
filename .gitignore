@@ -25,3 +25,4 @@ venv/
 .venv/
 core/
 migrations/
+postgres_data/
