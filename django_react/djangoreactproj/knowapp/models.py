@@ -19,6 +19,8 @@ class Answer(models.Model):
 class Question(models.Model):
     question_id = models.AutoField(primary_key=True)
     text = models.TextField()
+    image = models.ImageField(upload_to='images/', blank=True, null=True)
+    video = models.FileField(upload_to='videos/', blank=True, null=True)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     correct_answer = models.ForeignKey(Answer, on_delete=models.CASCADE, related_name='questions')
 

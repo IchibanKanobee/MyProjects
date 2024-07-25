@@ -20,6 +20,9 @@ EXPOSE 8000
 # Define environment variable
 ENV DJANGO_SETTINGS_MODULE=djangoreactproj.settings
 
-# Run the Django development server
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+RUN chmod +x /djangoreactproj/entrypoint.sh
 
+# Run the Django development server
+#CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+ENTRYPOINT ["/djangoreactproj/entrypoint.sh"]

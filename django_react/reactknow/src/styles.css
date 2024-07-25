@@ -1,0 +1,24 @@
+/* styles.css */
+body {
+  background-color: #f8f9fa;
+}
+
+.container {
+  max-width: 600px;
+  margin-top: 50px;
+}
+
+h1 {
+  color: #343a40;
+}
+
+.form-control,
+.form-control-file,
+.btn {
+  margin-bottom: 15px;
+}
+
+/* Custom styles for larger text areas */
+.large-textarea {
+  height: 150px; /* Adjust the height as needed */
+}

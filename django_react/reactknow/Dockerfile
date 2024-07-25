@@ -7,6 +7,10 @@ COPY package.json package-lock.json ./
 
 RUN npm install
 
+# Install Packages
+RUN npm install bootstrap
+RUN npm install react-router-dom
+
 COPY . .
 
 EXPOSE 3000
