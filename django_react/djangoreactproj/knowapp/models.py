@@ -2,7 +2,7 @@ from django.db import models
 
 class Subject(models.Model):
     subject_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, related_name='children', null=True, blank=True)
 
     def __str__(self):

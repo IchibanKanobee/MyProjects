@@ -25,7 +25,7 @@ function CreateQuestionForm() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/add-question/",
+        "http://djangoreactproj:8000/api/add-question/",
         formData,
         {
           headers: {
