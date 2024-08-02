@@ -146,16 +146,15 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'root': {
-        'handlers': ['console'],
-        'level': 'DEBUG',
-    },
-}
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+# Define subdirectories for images and videos
+IMAGE_UPLOAD_DIR = 'images'
+VIDEO_UPLOAD_DIR = 'videos'
+
+# Make sure the directories exist
+os.makedirs(os.path.join(MEDIA_ROOT, IMAGE_UPLOAD_DIR), exist_ok=True)
+os.makedirs(os.path.join(MEDIA_ROOT, VIDEO_UPLOAD_DIR), exist_ok=True)

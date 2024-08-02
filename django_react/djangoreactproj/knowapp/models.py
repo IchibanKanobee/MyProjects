@@ -1,4 +1,13 @@
 from django.db import models
+from django.conf import settings
+import os
+
+def get_image_upload_path(instance, filename):
+    return os.path.join(settings.IMAGE_UPLOAD_DIR, filename)
+
+def get_video_upload_path(instance, filename):
+    return os.path.join(settings.VIDEO_UPLOAD_DIR, filename)
+
 
 class Subject(models.Model):
     subject_id = models.AutoField(primary_key=True)
@@ -8,21 +17,14 @@ class Subject(models.Model):
     def __str__(self):
         return self.name
 
-class Answer(models.Model):
-    answer_id = models.AutoField(primary_key=True)
-    text = models.TextField()
-    image = models.ImageField(upload_to="images/", default="")
-
-    def __str__(self):
-        return self.text
 
 class Question(models.Model):
     question_id = models.AutoField(primary_key=True)
-    text = models.TextField()
-    image = models.ImageField(upload_to='images/', blank=True, null=True)
-    video = models.FileField(upload_to='videos/', blank=True, null=True)
+    question_text = models.TextField()
+    answer_text = models.TextField()
+    image = models.ImageField(upload_to=get_image_upload_path, blank=True, null=True)
+    video = models.FileField(upload_to=get_video_upload_path, blank=True, null=True)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
-    correct_answer = models.ForeignKey(Answer, on_delete=models.CASCADE, related_name='questions')
 
     def __str__(self):
         return self.text

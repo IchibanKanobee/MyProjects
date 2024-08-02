@@ -1,10 +1,5 @@
 from rest_framework import serializers
-from .models import Question, Answer, Subject
-
-class AnswerSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Answer
-        fields = '__all__'
+from .models import Question, Subject
 
 
 class QuestionSerializer(serializers.ModelSerializer):

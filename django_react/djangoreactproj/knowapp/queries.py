@@ -1,6 +1,6 @@
 from django_cte import With
 from django.db.models import OuterRef, Subquery
-from .models import Subject, Question, Answer
+from .models import Subject, Question
 
 def get_recursive_subjects(subject_name):
     subject_cte = With.recursive(Subject.objects.filter(name=subject_name)).union(
