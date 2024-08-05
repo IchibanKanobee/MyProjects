@@ -22,7 +22,4 @@ ENV DJANGO_SETTINGS_MODULE=djangoreactproj.settings
 
 RUN chmod +x /djangoreactproj/entrypoint.sh
 
-# Run the Django development server
-#CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-
 ENTRYPOINT ["/djangoreactproj/entrypoint.sh"]

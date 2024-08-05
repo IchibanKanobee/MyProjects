@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./styles.css"; // Import your custom CSS file if needed
+import "./styles.css";
 import { Modal, Button } from "react-bootstrap";
 
 function CreateSubjectForm() {
@@ -11,19 +11,20 @@ function CreateSubjectForm() {
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
 
+  // Function to fetch subjects
+  const fetchSubjects = async () => {
+    try {
+      console.log("Fetching subjects...");
+      const response = await axios.get("http://localhost:8000/api/subjects/");
+      console.log("Subjects fetched:", response.data);
+      setSubjects(response.data);
+    } catch (error) {
+      console.error("There was an error fetching the subjects:", error);
+    }
+  };
+
   // Fetch subjects when the component mounts
   useEffect(() => {
-    const fetchSubjects = async () => {
-      try {
-        console.log("Fetching subjects...");
-        const response = await axios.get("http://localhost:8000/api/subjects/");
-        console.log("Subjects fetched:", response.data);
-        setSubjects(response.data);
-      } catch (error) {
-        console.error("There was an error fetching the subjects:", error);
-      }
-    };
-
     fetchSubjects();
   }, []);
 
@@ -38,7 +39,6 @@ function CreateSubjectForm() {
     };
 
     try {
-      // Add subject via REST API
       console.log("Adding subject...", subjectData);
       const response = await axios.post(
         "http://localhost:8000/api/add-subject/",
@@ -66,8 +66,8 @@ function CreateSubjectForm() {
   const handleCloseModal = () => setShowModal(false);
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} className="container mt-5">
+    <div className="container mt-5">
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Name:</label>
           <input
@@ -89,6 +89,7 @@ function CreateSubjectForm() {
             id="parent"
             value={parent}
             onChange={(e) => setParent(e.target.value)}
+            onFocus={fetchSubjects} // Fetch subjects when the dropdown is focused
           >
             <option value="">None</option>
             {subjects.map((subject) => (

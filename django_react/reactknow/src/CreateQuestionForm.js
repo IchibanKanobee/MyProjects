@@ -117,7 +117,7 @@ const CreateQuestionForm = () => {
               Select a subject
             </option>
             {subjects.map((subj) => (
-              <option key={subj.id} value={subj.id}>
+              <option key={subj.subject_id} value={subj.subject_id}>
                 {subj.name} {/* Adjust based on your API response */}
               </option>
             ))}
