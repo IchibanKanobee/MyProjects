@@ -4,7 +4,7 @@ services:
       context: ./djangoreactproj
     volumes:
       - ./djangoreactproj:/djangoreactproj
-      - media_volume:/djangoreactproj/media  # Add this line to mount the media volume
+      - media_volume:/djangoreactproj/media # Add this line to mount the media volume
     ports:
       - "8000:8000"
     container_name: django_container
@@ -37,4 +37,4 @@ services:
 
 volumes:
   postgres_data:
-  media_volume: 
+  media_volume:

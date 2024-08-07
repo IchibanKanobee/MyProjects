@@ -2,8 +2,9 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Subject
+from .models import Subject, Question
 from .serializers import QuestionSerializer, SubjectSerializer
+from rest_framework.pagination import PageNumberPagination
 
 
 @api_view(['GET'])
@@ -35,3 +36,20 @@ def subject_list(request):
     subjects = Subject.objects.all()
     serializer = SubjectSerializer(subjects, many=True)
     return Response(serializer.data)
+
+
+
+class QuestionPagination(PageNumberPagination):
+    page_size = 1  # Number of questions per page
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
+
+@api_view(['GET'])
+def question_list(request):
+    subject_id = request.GET.get('subject_id')
+    questions = Question.objects.filter(subject_id=subject_id)
+    paginator = QuestionPagination()
+    result_page = paginator.paginate_queryset(questions, request)
+    serializer = QuestionSerializer(result_page, many=True)
+    return paginator.get_paginated_response(serializer.data)
