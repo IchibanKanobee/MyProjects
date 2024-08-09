@@ -45,7 +45,7 @@ class QuestionPagination(PageNumberPagination):
     max_page_size = 100
 
 
-'''
+
 @api_view(['GET'])
 def question_list(request):
     subject_id = request.GET.get('subject_id')
@@ -61,29 +61,24 @@ def question_list(request):
     result_page = paginator.paginate_queryset(questions, request)
     serializer = QuestionSerializer(result_page, many=True)
     return paginator.get_paginated_response(serializer.data)
-'''
 
-from django.http import JsonResponse
-from django.core.paginator import Paginator
+    '''
+    # Get all descendant subjects, including the selected subject
+    descendant_subjects = subject.get_all_descendants() | {subject}
+    
+    logger.debug("Descendant subjects: {}", descendant_subjects)
 
-@api_view(['GET'])
-def question_list(request):
-    subject_id = request.GET.get('subject_id')
-    page = request.GET.get('page', 1)
+    # Filter questions by these subjects
+    questions = Question.objects.filter(subject__in=descendant_subjects)
+    
+    logger.debug("Questions: {}", questions)
 
-    if not subject_id:
-        return JsonResponse({'error': 'subject_id is required'}, status=400)
-
-    try:
-        questions = Question.objects.filter(subject_id=subject_id)
-        paginator = Paginator(questions, 1)  # Paginate with 1 items per page
-        paginated_questions = paginator.page(page)
-        
-        data = {
-            'questions': list(paginated_questions.object_list.values()),
-            'page': paginated_questions.number,
-            'total_pages': paginator.num_pages,
-        }
-        return JsonResponse(data, safe=False)
-    except Exception as e:
-        return JsonResponse({'error': str(e)}, status=500)
+    # Paginate the queryset
+    paginator = QuestionPagination()
+    result_page = paginator.paginate_queryset(questions, request)
+    
+    # Serialize and return the paginated response
+    serializer = QuestionSerializer(result_page, many=True)
+    return paginator.get_paginated_response(serializer.data)
+   '''
+ 

@@ -23,8 +23,9 @@ const ShowQuestionForm = () => {
           `http://localhost:8000/api/questions/?subject_id=${selectedSubject}&page=${currentPage}`
         )
         .then((response) => {
-          setQuestions(response.data.results);
-          setTotalPages(response.data.count);
+          setQuestions(response.data.questions);
+          setTotalPages(response.data.total_pages);
+          setCurrentPage(response.data.page);
         })
         .catch((error) => console.error("Error fetching questions:", error));
     }
@@ -66,14 +67,14 @@ const ShowQuestionForm = () => {
             <p>{question.question_text}</p>
             {question.image && (
               <img
-                src={`http://localhost:8000/${question.image}`}
+                src={`http://localhost:8000/media/${question.image}`}
                 alt="Question related"
                 className="img-fluid"
               />
             )}
             {question.video && (
               <video
-                src={`http://localhost:8000/${question.video}`}
+                src={`http://localhost:8000/media/${question.video}`}
                 controls
                 className="img-fluid"
               />
